@@ -13,7 +13,7 @@ export default function RegistroMaestro() {
     ubicacion: '',
     dispuestoMovilizarse: false,
     trabajaConEquipo: false,
-    tamañoEquipo: 1,
+    tamanoEquipo: 1,
   });
   const [step, setStep] = useState('form'); // 'form', 'disponibilidad', 'success'
   const [disponibilidad, setDisponibilidad] = useState(null);
@@ -186,12 +186,12 @@ export default function RegistroMaestro() {
 
         {formData.trabajaConEquipo && (
           <div>
-            <label className="block text-gray-700 mb-2">Tamaño del equipo</label>
+            <label className="block text-gray-700 mb-2">Equipo</label>
             <input
               type="number"
               min="1"
-              value={formData.tamañoEquipo}
-              onChange={(e) => setFormData({...formData, tamañoEquipo: parseInt(e.target.value)})}
+              value={formData.tamanoEquipo}
+              onChange={(e) => setFormData({...formData, tamanoEquipo: parseInt(e.target.value)})}
               className="w-full p-2 border rounded"
             />
           </div>

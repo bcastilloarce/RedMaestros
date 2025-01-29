@@ -16,7 +16,7 @@ export default async function handler(req, res) {
       ubicacion,
       dispuestoMovilizarse,
       trabajaConEquipo,
-      tamañoEquipo,
+      tamanoEquipo,
       disponibilidad
     } = req.body;
 
@@ -30,7 +30,7 @@ export default async function handler(req, res) {
         ubicacion,
         dispuestoMovilizarse,
         trabajaConEquipo,
-        tamañoEquipo,
+        tamanoEquipo,
         disponibilidad
       }
     });

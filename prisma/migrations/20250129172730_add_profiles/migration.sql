@@ -18,7 +18,7 @@ CREATE TABLE "Maestro" (
     "ubicacion" TEXT NOT NULL,
     "dispuestoMovilizarse" BOOLEAN NOT NULL DEFAULT false,
     "trabajaConEquipo" BOOLEAN NOT NULL DEFAULT false,
-    "tamañoEquipo" INTEGER,
+    "tamanoEquipo" INTEGER,
     "disponibilidad" JSONB,
     "verificado" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

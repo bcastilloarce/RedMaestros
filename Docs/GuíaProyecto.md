@@ -351,7 +351,7 @@ model Maestro {
   ubicacion           String    // Comuna
   dispuestoMovilizarse Boolean  @default(false)
   trabajaConEquipo    Boolean   @default(false)
-  tamañoEquipo        Int?
+  tamanoEquipo        Int?
   disponibilidad      Json?     // Horario disponible
   verificado          Boolean   @default(false)
   createdAt           DateTime  @default(now())
