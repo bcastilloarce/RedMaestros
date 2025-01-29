@@ -1,8 +1,1 @@
-{
-  "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/administradores": "pages/administradores.js",
-  "/auth/login": "pages/auth/login.js",
-  "/": "pages/index.js"
-}
+{"/_error":"pages/_error.js","/_app":"pages/_app.js","/api/maestros":"pages/api/maestros.js","/auth/login":"pages/auth/login.html","/administradores":"pages/administradores.html","/api/maestros/register":"pages/api/maestros/register.js","/":"pages/index.html","/login/[tipo]":"pages/login/[tipo].html","/maestros/disponibilidad":"pages/maestros/disponibilidad.html","/como-funciona":"pages/como-funciona.html","/registro/cliente":"pages/registro/cliente.html","/registro/maestro":"pages/registro/maestro.html","/_document":"pages/_document.js","/404":"pages/404.html"}

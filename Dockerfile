@@ -13,13 +13,13 @@ RUN apt-get update && \
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies with clean install
-RUN npm ci
+# Clean install dependencies
+RUN npm install
 
 # Copy Prisma schema
 COPY prisma ./prisma/
 
-# Generate Prisma Client
+# Generate Prisma Client with edge support
 RUN npx prisma generate
 
 # Copy the rest of the application
@@ -36,12 +36,16 @@ WORKDIR /app
 # Copy built assets
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/prisma ./prisma
 
 # Expose the port
 EXPOSE 3000
+
+# Set environment variables
+ENV NODE_ENV=production
+ENV PORT=3000
 
 # Start the application
 CMD ["npm", "start"]
