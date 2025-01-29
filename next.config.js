@@ -8,6 +8,7 @@ const withPWA = require('next-pwa')({
 
 const nextConfig = {
   reactStrictMode: true,
+  swcMinify: true,
   poweredByHeader: false,
   compress: true,
   images: {
@@ -57,7 +58,8 @@ const nextConfig = {
     ]
   },
   experimental: {
-    serverComponentsExternalPackages: ['@prisma/client']
+    serverActions: true,
+    esmExternals: 'loose'
   },
   onDemandEntries: {
     maxInactiveAge: 60 * 60 * 1000,
