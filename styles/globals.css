@@ -1,0 +1,44 @@
+/* Tailwind CSS Directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base configurations for mobile-first approach */
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 255, 255, 255;
+  
+  /* Mobile-optimized font sizes */
+  --font-size-base: 16px;
+  --safe-area-inset-bottom: env(safe-area-inset-bottom);
+}
+
+html {
+  font-size: var(--font-size-base);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+  /* Prevent overflow issues on mobile */
+  overflow-x: hidden;
+  /* Enable smooth scrolling */
+  scroll-behavior: smooth;
+  /* Improve touch events */
+  touch-action: manipulation;
+  /* Prevent text scaling */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Account for iOS safe areas */
+  padding-bottom: var(--safe-area-inset-bottom);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Improve touch targets for mobile */
+button, a, input, select, textarea {
+  @apply min-h-[44px] min-w-[44px];
+}
