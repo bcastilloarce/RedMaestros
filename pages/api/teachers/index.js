@@ -7,15 +7,15 @@ export default async function handler(req, res) {
   }
 
   try {
-    const teachers = await prisma.teacher.findMany({
+    const maestros = await prisma.maestro.findMany({
       orderBy: {
         createdAt: 'desc'
       }
     });
 
-    res.status(200).json(teachers);
+    res.status(200).json(maestros);
   } catch (error) {
-    console.error('Error fetching teachers:', error);
-    res.status(500).json({ message: 'Error fetching teachers', error: error.message });
+    console.error('Error fetching maestros:', error);
+    res.status(500).json({ message: 'Error fetching maestros', error: error.message });
   }
 }

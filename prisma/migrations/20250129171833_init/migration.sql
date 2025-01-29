@@ -10,7 +10,7 @@ CREATE TABLE "User" (
 );
 
 -- CreateTable
-CREATE TABLE "Teacher" (
+CREATE TABLE "Maestro" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "subject" TEXT NOT NULL,
@@ -18,11 +18,11 @@ CREATE TABLE "Teacher" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "Teacher_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Maestro_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Teacher_email_key" ON "Teacher"("email");
+CREATE UNIQUE INDEX "Maestro_email_key" ON "Maestro"("email");

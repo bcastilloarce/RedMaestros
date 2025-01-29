@@ -20,7 +20,7 @@ export default async function handler(req, res) {
       disponibilidad
     } = req.body;
 
-    const teacher = await prisma.teacher.create({
+    const maestro = await prisma.maestro.create({
       data: {
         name: nombre,
         specialty: especialidad,
@@ -35,9 +35,9 @@ export default async function handler(req, res) {
       }
     });
 
-    res.status(201).json(teacher);
+    res.status(201).json(maestro);
   } catch (error) {
     console.error('Registration error:', error);
-    res.status(500).json({ message: 'Error registering teacher', error: error.message });
+    res.status(500).json({ message: 'Error registering maestro', error: error.message });
   }
 }
