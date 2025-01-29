@@ -1,37 +1,86 @@
 # Guía para el Proyecto: Plataforma Digital para Red de Maestros de Construcción "RedMaestros"
 
-## 1. Objetivo del Proyecto
+## 1. Nomenclatura y Definiciones
+
+### 1.1 Tipos de Usuario
+
+- **Usuario**: Término general que se refiere a cualquier persona registrada en la plataforma, sea Maestro, Cliente o Administrador.
+
+- **Maestro**: Profesional de la construcción que ofrece servicios especializados a través de la plataforma. Cuenta con habilidades específicas en áreas como albañilería, carpintería, electricidad, etc.
+
+- **Cliente**: Persona que solicita servicios de construcción, remodelación o reparación a través de la plataforma.
+
+- **Administrador**: Personal autorizado que gestiona la plataforma, supervisa las operaciones y garantiza el correcto funcionamiento del sistema.
+
+### 1.2 Términos Específicos
+
+- **Servicio**: Trabajo específico solicitado por un Cliente y realizado por un Maestro.
+- **Disponibilidad**: Períodos de tiempo en los que un Maestro puede aceptar trabajos.
+- **Especialidad**: Área específica de expertise de un Maestro (ej. albañilería, pintura).
+- **Portal**: Interfaz específica para cada tipo de usuario con funcionalidades personalizadas.
+
+## 2. Objetivo del Proyecto
 
 Diseñar y desarrollar una plataforma digital que permita conectar maestros de construcción calificados con clientes que necesiten servicios de terminaciones, reparaciones o remodelaciones. La solución estará optimizada para móviles y permitirá gestionar horarios, especialidades, equipos de trabajo y mensajes de orientación de manera ágil y sencilla.
 
 ---
 
-## 2. Funciones Principales
+## 3. Funciones Principales
 
-### 2.1 Registro de Maestros
+### 3.1 Registro de Maestros
 
-- **Datos requeridos:**
+- **Datos personales:**
   - Nombre completo
-  - Especialidad (ej. albañilería, pintura, carpintería, etc.)
-  - Horarios disponibles
-  - Opciones de trabajo:
-    - ¿Trabaja solo o con equipo?
-    - Si trabaja con equipo, ingresar cantidad de personas.
+  - RUT/DNI
+  - Dirección
+  - Teléfono de contacto
+  - Correo electrónico
+  - Foto de perfil
 
-### 2.2 Gestión de Disponibilidad
+- **Datos profesionales:**
+  - Especialidades (múltiple selección)
+  - Años de experiencia por especialidad
+  - Referencias laborales (opcional)
+  - Certificaciones (opcional)
 
-- Permitir a los maestros indicar los días y horas disponibles para trabajar.
-- Preguntar si su disponibilidad es recurrente o puntual.
+- **Datos operativos:**
+  - Zona de trabajo (comunas/sectores)
+  - Modalidad de trabajo (solo/equipo)
+  - Tamaño del equipo (si aplica)
+  - Herramientas y equipamiento disponible
 
-### 2.3 Registro de Clientes
+### 3.2 Gestión de Disponibilidad
 
-- **Datos requeridos:**
+- **Horario Regular:**
+  - Días laborables
+  - Horario por día
+  - Pausas programadas (almuerzo, etc.)
+
+- **Excepciones:**
+  - Vacaciones
+  - Días festivos
+  - Ausencias planificadas
+
+- **Configuración de Agenda:**
+  - Duración mínima/máxima por servicio
+  - Tiempo de traslado entre servicios
+  - Preferencias de horario (mañana/tarde)
+
+### 3.3 Registro de Clientes
+
+- **Datos personales:**
   - Nombre completo
-  - Proyecto (detalle del servicio que necesita)
-  - Ubicación
-  - Fecha y hora deseada para el servicio.
+  - RUT/DNI
+  - Dirección principal
+  - Teléfono de contacto
+  - Correo electrónico
 
-### 2.4 Solicitud y Asignación de Servicios
+- **Preferencias:**
+  - Horarios preferidos para servicios
+  - Método de contacto preferido
+  - Método de pago preferido
+
+### 3.4 Solicitud y Asignación de Servicios
 
 - Los clientes seleccionan:
   - Tipo de servicio: Terminación fina (estética) o gruesa (estructural).
@@ -39,13 +88,13 @@ Diseñar y desarrollar una plataforma digital que permita conectar maestros de c
   - Especialidad requerida.
 - La plataforma asigna automáticamente a un maestro disponible, considerando la especialidad, horario y ubicación.
 
-### 2.5 Mensajes de Orientación
+### 3.5 Mensajes de Orientación
 
 - Mostrar mensajes informativos a los maestros y clientes:
   - Para los maestros: "Recuerda que tu perfil debe estar completo para recibir más asignaciones."
   - Para los clientes: "Cuanto más detalles incluyas en tu solicitud, más precisa será la asignación del maestro adecuado."
 
-### 2.6 Panel de Control
+### 3.6 Panel de Control
 
 - **Para Maestros:**
   - Ver proyectos asignados.
