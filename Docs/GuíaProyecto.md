@@ -317,3 +317,152 @@ function killport() {
    - En otra terminal, ejecuta `okmaestros`
    - Copia la URL de "Forwarding" para compartir la aplicación
    - Para detener el túnel: Ctrl+C en la terminal de ngrok
+
+## 10. Configuración de Base de Datos y Despliegue
+
+### 10.1 Base de Datos con Railway y Prisma
+
+#### Configuración de Railway
+
+1. **Provisión de Base de Datos:**
+   - PostgreSQL hosteado en Railway
+   - URL de conexión segura con credenciales
+   - Base de datos principal y shadow para migraciones
+
+2. **Variables de Entorno:**
+
+```env
+DATABASE_URL="postgresql://postgres:[PASSWORD]@viaduct.proxy.rlwy.net:[PORT]/railway"
+SHADOW_DATABASE_URL="postgresql://postgres:[PASSWORD]@viaduct.proxy.rlwy.net:[PORT]/railway_shadow"
+```
+
+#### Estructura Prisma
+
+1.**Schema Principal** (`prisma/schema.prisma`):
+
+```prisma
+model Maestro {
+  id                   Int       @id @default(autoincrement())
+  nombre              String
+  especialidad        String    // Albañilería, Pintura, etc.
+  otraEspecialidad    String?
+  telefono            String
+  email               String    @unique
+  ubicacion           String    // Comuna
+  dispuestoMovilizarse Boolean  @default(false)
+  trabajaConEquipo    Boolean   @default(false)
+  tamañoEquipo        Int?
+  disponibilidad      Json?     // Horario disponible
+  verificado          Boolean   @default(false)
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+}
+
+model Cliente {
+  id                   Int       @id @default(autoincrement())
+  nombre              String
+  telefono            String
+  email               String    @unique
+  ubicacion           String    // Comuna
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+}
+```
+
+2.**Comandos de Prisma:**
+
+```bash
+# Generar cliente Prisma
+npx prisma generate
+
+# Crear migración
+npx prisma migrate dev --name init
+
+# Aplicar migraciones
+npx prisma migrate deploy
+```
+
+### 10.2 Despliegue con Vercel
+
+#### Configuración de Despliegue
+
+1.**Scripts de Build:**
+
+```json
+{
+  "scripts": {
+    "build": "prisma generate && next build",
+    "postinstall": "prisma generate"
+  }
+}
+```
+
+2.**Variables de Entorno en Vercel:**
+
+- Configurar DATABASE_URL en el panel de Vercel
+- Asegurar que coincida con la URL de Railway
+
+#### Flujo de Desarrollo a Producción
+
+1. **Desarrollo Local:**
+   - Usar `.env` para variables locales
+   - Ejecutar `npm run dev` para desarrollo
+   - Probar cambios con base de datos local
+
+2. **Staging/Pruebas:**
+   - Rama `develop` para pruebas
+   - Preview deployments en Vercel
+   - Verificar migraciones en DB de pruebas
+
+3. **Producción:**
+   - Merge a `main` para deploy automático
+   - Vercel ejecuta build con Prisma
+   - Railway mantiene DB en producción
+
+### 10.3 Manejo de API
+
+#### Endpoints de Maestros
+
+```javascript
+// POST /api/maestros/register
+// Registro de nuevo maestro
+try {
+  const maestro = await prisma.maestro.create({
+    data: {
+      nombre,
+      especialidad,
+      // ... otros campos
+    }
+  });
+}
+
+// GET /api/maestros
+// Obtener lista de maestros
+const maestros = await prisma.maestro.findMany({
+  orderBy: { createdAt: 'desc' }
+});
+```
+
+#### Seguridad y Validación
+
+- Validación de datos antes de DB
+- Manejo de errores consistente
+- Respuestas HTTP apropiadas
+- Protección contra inyección SQL (via Prisma)
+
+### 10.4 Monitoreo y Mantenimiento
+
+1. **Logs y Diagnóstico:**
+   - Vercel Analytics para rendimiento
+   - Railway Metrics para DB
+   - Logging estructurado en API
+
+2. **Backups y Recuperación:**
+   - Backups automáticos en Railway
+   - Procedimiento de restauración
+   - Migraciones reversibles
+
+3. **Escalabilidad:**
+   - Connection pooling con Prisma
+   - Caché de consultas frecuentes
+   - Optimización de índices DB

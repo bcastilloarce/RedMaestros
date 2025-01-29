@@ -1,14 +1,34 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Administradores() {
-  // Ejemplo de datos (en producción, estos vendrían de una API)
-  const [maestros] = useState([]);
-  const [clientes] = useState([]);
+  const [maestros, setMaestros] = useState([]);
+  const [clientes, setClientes] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [teachersRes, clientsRes] = await Promise.all([
+          fetch('/api/teachers'),
+          fetch('/api/clients')
+        ]);
+
+        const teachersData = await teachersRes.json();
+        const clientsData = await clientsRes.json();
+
+        setMaestros(teachersData);
+        setClientes(clientsData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">Panel de Administradores</h1>
-      
+
       <div className="grid grid-cols-2 gap-8">
         {/* Columna de Maestros */}
         <div>

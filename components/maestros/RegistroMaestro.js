@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import GestionDisponibilidad from './GestionDisponibilidad';
+import { useRouter } from 'next/router';
 
 export default function RegistroMaestro() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     nombre: '',
     especialidad: '',
@@ -30,11 +32,34 @@ export default function RegistroMaestro() {
     setStep('disponibilidad');
   };
 
-  const handleDisponibilidadSubmit = (disponibilidadData) => {
+  const handleDisponibilidadSubmit = async (disponibilidadData) => {
     setDisponibilidad(disponibilidadData);
-    // Aquí iría la lógica para enviar los datos al backend
-    console.log('Datos del maestro:', { ...formData, disponibilidad: disponibilidadData });
-    setStep('success');
+
+    try {
+      const response = await fetch('/api/teachers/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          disponibilidad: disponibilidadData
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error en el registro');
+      }
+
+      setStep('success');
+      // Redirect to profile after successful registration
+      setTimeout(() => {
+        router.push(`/perfil/maestro/${response.id}`);
+      }, 2000);
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error al registrar. Por favor intente nuevamente.');
+    }
   };
 
   if (step === 'success') {
