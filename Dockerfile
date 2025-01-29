@@ -13,12 +13,15 @@ RUN apt-get update && \
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies (modificado para mayor compatibilidad)
+# Install dependencies (including devDependencies for build)
 RUN npm install --production=false
 
-# Generate Prisma Client
+# Install Prisma globally
+RUN npm install -g prisma
+
+# Copy Prisma schema and generate client
 COPY prisma ./prisma
-RUN npx prisma generate
+RUN prisma generate
 
 # Copy the rest of the application
 COPY . .
