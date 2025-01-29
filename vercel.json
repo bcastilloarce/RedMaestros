@@ -1,17 +1,12 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
-    }
-  ],
-  "build": {
-    "env": {
-      "PRISMA_GENERATE": "true"
-    }
-  },
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
   "env": {
-    "DATABASE_URL": "@database_url"
+    "DATABASE_URL": "@database_url",
+    "KV_URL": "@kv_url",
+    "KV_REST_API_TOKEN": "@kv_rest_api_token"
   }
 }
