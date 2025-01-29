@@ -23,7 +23,7 @@ RedMaestros es una plataforma digital que conecta maestros de construcción cali
 1. Clona el repositorio:
 
    ```bash
-   git clone [url-del-repositorio]
+   git clone https://github.com/bcastilloarce/RedMaestros.git
    ```
 
 2. Instala las dependencias:
