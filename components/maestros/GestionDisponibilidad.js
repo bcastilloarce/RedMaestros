@@ -6,41 +6,8 @@ import es from 'date-fns/locale/es';
 export default function GestionDisponibilidad({ onSubmit }) {
   const [selectedDay, setSelectedDay] = useState(null);
   const [selectedHours, setSelectedHours] = useState([]);
-  const [horarioRegular, setHorarioRegular] = useState({
-    lunes: { activo: true, inicio: '09:00', fin: '18:00', pausas: [] },
-    martes: { activo: true, inicio: '09:00', fin: '18:00', pausas: [] },
-    miercoles: { activo: true, inicio: '09:00', fin: '18:00', pausas: [] },
-    jueves: { activo: true, inicio: '09:00', fin: '18:00', pausas: [] },
-    viernes: { activo: true, inicio: '09:00', fin: '18:00', pausas: [] },
-    sabado: { activo: false, inicio: '09:00', fin: '13:00', pausas: [] },
-    domingo: { activo: false, inicio: '09:00', fin: '13:00', pausas: [] },
-  });
-  const [diasNoDisponibles, setDiasNoDisponibles] = useState([]);
-  const [configuracionServicios, setConfiguracionServicios] = useState({
-    duracionMinima: 2,
-    duracionMaxima: 8,
-    tiempoTraslado: 30,
-    preferenciaHorario: 'mañana',
-  });
-
-  const diasSemana = [
-    'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'
-  ];
-
-  const handleHorarioChange = (dia, campo, valor) => {
-    setHorarioRegular(prev => ({
-      ...prev,
-      [dia]: { ...prev[dia], [campo]: valor }
-    }));
-  };
-
-  const handleConfiguracionChange = (campo, valor) => {
-    setConfiguracionServicios(prev => ({
-      ...prev,
-      [campo]: valor
-    }));
-  };
-
+  
+  // Generar horas disponibles desde 8am hasta 8pm
   const horasDisponibles = Array.from({ length: 13 }, (_, i) => {
     const hour = i + 8;
     return `${hour.toString().padStart(2, '0')}:00`;
@@ -60,177 +27,96 @@ export default function GestionDisponibilidad({ onSubmit }) {
     if (selectedDay && selectedHours.length > 0) {
       onSubmit({
         fecha: selectedDay,
-        horas: selectedHours,
-        horarioRegular,
-        diasNoDisponibles,
-        configuracionServicios
+        horas: selectedHours
       });
     }
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow">
-      <h2 className="text-2xl font-bold mb-6">Gestión de Disponibilidad</h2>
-      
-      {/* Horario Regular */}
-      <section className="mb-8">
-        <h3 className="text-xl font-semibold mb-4">Horario Regular</h3>
-        <div className="grid gap-4">
-          {diasSemana.map(dia => (
-            <div key={dia} className="flex items-center gap-4 p-2 bg-gray-50 rounded">
-              <label className="flex items-center gap-2 w-40">
-                <input
-                  type="checkbox"
-                  checked={horarioRegular[dia].activo}
-                  onChange={(e) => handleHorarioChange(dia, 'activo', e.target.checked)}
-                  className="rounded text-blue-600"
-                />
-                <span className="capitalize">{dia}</span>
-              </label>
-              <div className="flex gap-4">
-                <input
-                  type="time"
-                  value={horarioRegular[dia].inicio}
-                  onChange={(e) => handleHorarioChange(dia, 'inicio', e.target.value)}
-                  disabled={!horarioRegular[dia].activo}
-                  className="rounded border-gray-300"
-                />
-                <span>a</span>
-                <input
-                  type="time"
-                  value={horarioRegular[dia].fin}
-                  onChange={(e) => handleHorarioChange(dia, 'fin', e.target.value)}
-                  disabled={!horarioRegular[dia].activo}
-                  className="rounded border-gray-300"
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Excepciones */}
-      <section className="mb-8">
-        <h3 className="text-xl font-semibold mb-4">Días No Disponibles</h3>
-        <div className="border rounded-lg p-4">
-          <DayPicker
-            mode="multiple"
-            selected={diasNoDisponibles}
-            onSelect={setDiasNoDisponibles}
-            locale={es}
-            className="mx-auto"
-          />
-        </div>
-      </section>
-
-      {/* Configuración de Servicios */}
-      <section className="mb-8">
-        <h3 className="text-xl font-semibold mb-4">Configuración de Servicios</h3>
-        <div className="grid gap-4 max-w-xl">
-          <div className="grid grid-cols-2 gap-4">
-            <label className="block">
-              <span className="text-gray-700">Duración mínima (horas)</span>
-              <input
-                type="number"
-                min="1"
-                max="24"
-                value={configuracionServicios.duracionMinima}
-                onChange={(e) => handleConfiguracionChange('duracionMinima', parseInt(e.target.value))}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-              />
-            </label>
-            <label className="block">
-              <span className="text-gray-700">Duración máxima (horas)</span>
-              <input
-                type="number"
-                min="1"
-                max="24"
-                value={configuracionServicios.duracionMaxima}
-                onChange={(e) => handleConfiguracionChange('duracionMaxima', parseInt(e.target.value))}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-              />
-            </label>
-          </div>
-          
-          <label className="block">
-            <span className="text-gray-700">Tiempo de traslado (minutos)</span>
-            <input
-              type="number"
-              min="0"
-              max="120"
-              value={configuracionServicios.tiempoTraslado}
-              onChange={(e) => handleConfiguracionChange('tiempoTraslado', parseInt(e.target.value))}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+    <div className="w-full max-w-lg mx-auto px-4">
+      <div className="space-y-6">
+        {/* Selector de día */}
+        <section className="bg-white rounded-lg shadow-sm p-4">
+          <h3 className="text-lg font-semibold mb-3 text-gray-800">
+            Selecciona el día
+          </h3>
+          <div className="flex justify-center">
+            <DayPicker
+              mode="single"
+              selected={selectedDay}
+              onSelect={setSelectedDay}
+              locale={es}
+              className="!w-auto"
+              fromDate={new Date()}
+              modifiersClassNames={{
+                selected: 'bg-blue-600 text-white',
+                today: 'font-bold border border-blue-600'
+              }}
+              styles={{
+                caption: { color: '#2563eb' },
+                head: { color: '#4b5563' },
+                day: { margin: '0.2em' }
+              }}
             />
-          </label>
-          
-          <label className="block">
-            <span className="text-gray-700">Preferencia de horario</span>
-            <select
-              value={configuracionServicios.preferenciaHorario}
-              onChange={(e) => handleConfiguracionChange('preferenciaHorario', e.target.value)}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-            >
-              <option value="mañana">Mañana</option>
-              <option value="tarde">Tarde</option>
-              <option value="indistinto">Indistinto</option>
-            </select>
-          </label>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      <div className="space-y-8">
-        <div className="grid md:grid-cols-2 gap-8">
-          <section>
-            <h3 className="text-lg font-semibold mb-4">Selecciona el día</h3>
-            <div className="border rounded-lg p-4">
-              <DayPicker
-                mode="single"
-                selected={selectedDay}
-                onSelect={setSelectedDay}
-                locale={es}
-                className="mx-auto"
-                fromDate={new Date()}
-              />
+        {/* Selector de horas */}
+        <section className="bg-white rounded-lg shadow-sm p-4">
+          <h3 className="text-lg font-semibold mb-3 text-gray-800">
+            {selectedDay ? 'Selecciona tus horas disponibles' : 'Primero selecciona un día'}
+          </h3>
+          <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+            {horasDisponibles.map((hora) => (
+              <button
+                key={hora}
+                onClick={() => handleHourToggle(hora)}
+                disabled={!selectedDay}
+                className={`
+                  py-2 px-3 rounded-md text-sm font-medium transition-colors
+                  ${selectedHours.includes(hora)
+                    ? 'bg-blue-600 text-white hover:bg-blue-700'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}
+                  ${!selectedDay && 'opacity-50 cursor-not-allowed'}
+                `}
+              >
+                {hora}
+              </button>
+            ))}
+          </div>
+        </section>
+
+        {/* Resumen y botones */}
+        <section className="bg-white rounded-lg shadow-sm p-4">
+          <div className="space-y-4">
+            {selectedDay && selectedHours.length > 0 && (
+              <div className="text-sm text-gray-600">
+                <p>Has seleccionado {selectedHours.length} hora(s) para el día seleccionado.</p>
+              </div>
+            )}
+            <div className="flex flex-col sm:flex-row gap-3 justify-end">
+              <button
+                onClick={() => onSubmit(null)}
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              >
+                Volver
+              </button>
+              <button
+                onClick={handleSubmit}
+                disabled={!selectedDay || selectedHours.length === 0}
+                className={`
+                  px-4 py-2 text-sm font-medium text-white rounded-md
+                  ${selectedDay && selectedHours.length > 0
+                    ? 'bg-blue-600 hover:bg-blue-700'
+                    : 'bg-gray-400 cursor-not-allowed'}
+                  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+                `}
+              >
+                Registrarse
+              </button>
             </div>
-          </section>
-
-          <section>
-            <h3 className="text-lg font-semibold mb-4">Selecciona las horas disponibles</h3>
-            <div className="grid grid-cols-3 gap-2">
-              {horasDisponibles.map((hora) => (
-                <button
-                  key={hora}
-                  onClick={() => handleHourToggle(hora)}
-                  className={`p-2 rounded ${
-                    selectedHours.includes(hora)
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-100 hover:bg-gray-200'
-                  }`}
-                  disabled={!selectedDay}
-                >
-                  {hora}
-                </button>
-              ))}
-            </div>
-          </section>
-        </div>
-
-        <div className="flex justify-between gap-4">
-          <button
-            onClick={() => onSubmit(null)}
-            className="px-6 py-2 border border-gray-300 rounded hover:bg-gray-50"
-          >
-            Volver
-          </button>
-          <button
-            onClick={handleSubmit}
-            disabled={!selectedDay || selectedHours.length === 0}
-            className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Registrarse
-          </button>
-        </div>
+          </div>
+        </section>
       </div>
     </div>
   );
