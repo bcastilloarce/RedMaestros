@@ -13,9 +13,8 @@ RUN apt-get update && \
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies with specific npm config
-RUN npm config set unsafe-perm true && \
-    npm ci --production
+# Install dependencies (modificado para mayor compatibilidad)
+RUN npm install --production=false
 
 # Generate Prisma Client
 COPY prisma ./prisma
@@ -26,6 +25,9 @@ COPY . .
 
 # Build the application
 RUN npm run build
+
+# Clean up development dependencies
+RUN npm prune --production
 
 # Expose the port the app runs on
 EXPOSE 3000
