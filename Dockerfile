@@ -13,24 +13,20 @@ RUN apt-get update && \
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies (including devDependencies for build)
-RUN npm install --production=false
+# Install dependencies with legacy peer deps flag to avoid issues
+RUN npm install --legacy-peer-deps
 
-# Install Prisma globally
-RUN npm install -g prisma
-
-# Copy Prisma schema and generate client
+# Copy Prisma schema
 COPY prisma ./prisma
-RUN prisma generate
+
+# Generate Prisma Client
+RUN npx prisma generate
 
 # Copy the rest of the application
 COPY . .
 
 # Build the application
 RUN npm run build
-
-# Clean up development dependencies
-RUN npm prune --production
 
 # Expose the port the app runs on
 EXPOSE 3000
