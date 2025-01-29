@@ -7,6 +7,7 @@ export default function RegistroMaestro() {
     especialidad: '',
     otraEspecialidad: '',
     telefono: '',
+    email: '',
     ubicacion: '',
     dispuestoMovilizarse: false,
     trabajaConEquipo: false,
@@ -107,6 +108,18 @@ export default function RegistroMaestro() {
             onChange={(e) => setFormData({...formData, telefono: e.target.value})}
             className="w-full p-2 border rounded"
             required
+          />
+        </div>
+
+        <div>
+          <label className="block text-gray-700 mb-2">Correo Electrónico</label>
+          <input
+            type="email"
+            value={formData.email}
+            onChange={(e) => setFormData({...formData, email: e.target.value})}
+            className="w-full p-2 border rounded"
+            required
+            placeholder="ejemplo@correo.com"
           />
         </div>
 

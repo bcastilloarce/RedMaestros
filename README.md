@@ -1,68 +1,93 @@
-# RedMaestros - Plataforma de Conexión de Servicios de Construcción
+# 🏗️ RedMaestros - Plataforma de Conexión de Servicios de Construcción
 
 RedMaestros es una plataforma digital que conecta maestros de construcción calificados con clientes que necesitan servicios de terminaciones, reparaciones o remodelaciones.
 
-## Características Principales
+## ✨ Características Principales
 
-- Registro de maestros con especialidades y disponibilidad
-- Registro de clientes y solicitud de servicios
-- Sistema de asignación automática basado en especialidad y disponibilidad
-- Interfaz optimizada para móviles (PWA)
-- Sistema de mensajería y notificaciones
+* 👷 Registro de maestros con especialidades y disponibilidad
+* 👥 Registro de clientes y solicitud de servicios
+* 🤖 Sistema de asignación automática basado en especialidad y disponibilidad
+* 📱 Interfaz optimizada para móviles (PWA)
+* 💬 Sistema de mensajería y notificaciones
 
-## Tecnologías Utilizadas
+## 🛠️ Tecnologías Utilizadas
 
-- React + Next.js
-- Tailwind CSS
-- Framer Motion
-- Node.js + Express (próximamente)
-- PostgreSQL (próximamente)
+* ⚛️ React + Next.js
+* 🎨 Tailwind CSS
+* 🎭 Framer Motion
+* 🚀 Node.js + Express (próximamente)
+* 🗄️ PostgreSQL (próximamente)
 
-## Instalación
+## 🚀 Instalación
 
 1. Clona el repositorio:
-\`\`\`bash
-git clone [url-del-repositorio]
-\`\`\`
+
+   ```bash
+   git clone [url-del-repositorio]
+   ```
 
 2. Instala las dependencias:
-\`\`\`bash
-npm install
-\`\`\`
 
-3. Inicia el servidor de desarrollo:
-\`\`\`bash
-npm run dev
-\`\`\`
+   ```bash
+   cd RedMaestros
+   npm install
+   ```
 
-## Estructura del Proyecto
+3. Configura las variables de entorno:
 
-La estructura del proyecto sigue una organización modular y escalable:
+   ```bash
+   cp .env.example .env.local
+   ```
 
-\`\`\`
+4. Inicia el servidor de desarrollo:
+
+   ```bash
+   npm run dev
+   ```
+
+## 📁 Estructura del Proyecto
+
+```plaintext
 RedMaestros/
-├── src/
-│   ├── componentes/      # Componentes React
-│   ├── páginas/         # Páginas y rutas
-│   ├── estilos/         # Estilos y Tailwind
-│   ├── hooks/           # Hooks personalizados
-│   ├── contexto/        # Contextos React
-│   ├── utilidades/      # Funciones utilitarias
-│   └── servicios/       # Servicios y APIs
-├── público/            # Archivos estáticos
-├── docs/              # Documentación
-├── pruebas/           # Tests
-└── configuración/     # Archivos de configuración
-\`\`\`
+├── components/           # Componentes React reutilizables
+│   ├── diseño/          # Componentes de diseño (Header, Footer, etc.)
+│   ├── maestros/        # Componentes relacionados con maestros
+│   └── clientes/        # Componentes relacionados con clientes
+├── pages/               # Páginas y rutas de Next.js
+│   ├── api/            # Endpoints de la API
+│   └── auth/           # Páginas de autenticación
+├── styles/             # Estilos globales y Tailwind
+├── hooks/              # Hooks personalizados de React
+├── context/            # Contextos de React
+├── utils/              # Funciones utilitarias
+├── services/           # Servicios y llamadas a API
+├── public/             # Archivos estáticos
+└── docs/              # Documentación
+```
 
-## Contribuir
+## 🤝 Contribuir
 
 1. Haz fork del proyecto
-2. Crea una rama para tu feature (\`git checkout -b feature/AmazingFeature\`)
-3. Commit tus cambios (\`git commit -m 'Add some AmazingFeature'\`)
-4. Push a la rama (\`git push origin feature/AmazingFeature\`)
+2. Crea una rama para tu feature:
+
+   ```bash
+   git checkout -b feature/NuevaCaracteristica
+   ```
+
+3. Commit tus cambios:
+
+   ```bash
+   git commit -m 'Agrega nueva característica'
+   ```
+
+4. Push a la rama:
+
+   ```bash
+   git push origin feature/NuevaCaracteristica
+   ```
+
 5. Abre un Pull Request
 
-## Licencia
+## 📝 Licencia
 
-Este proyecto está bajo la Licencia MIT - ver el archivo LICENSE.md para más detalles.
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para más detalles.
