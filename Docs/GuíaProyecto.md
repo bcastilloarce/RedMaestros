@@ -223,41 +223,48 @@ Diseñar y desarrollar una plataforma digital que permita conectar maestros de c
 
 ```txt
 RedMaestros/
-├── Docs/                          # Documentación del proyecto
-│   └── GuíaProyecto.md           # Guía principal con instrucciones y estructura
 ├── components/                    # Componentes React reutilizables
 │   ├── clientes/                 # Componentes específicos para clientes
 │   │   └── RegistroCliente.js    # Formulario de registro para clientes
-│   ├── comunes/                  # Componentes compartidos entre módulos
 │   ├── diseño/                   # Componentes de interfaz y layout
 │   │   ├── Footer.js            # Pie de página común
 │   │   └── Header.js            # Encabezado y navegación
 │   └── maestros/                 # Componentes específicos para maestros
+│       ├── GestionDisponibilidad.js  # Gestión de horarios y disponibilidad
 │       └── RegistroMaestro.js   # Formulario de registro para maestros
-├── configuración/                # Archivos de configuración del proyecto
-├── context/                      # Contextos de React para estado global
+├── Docs/                         # Documentación del proyecto
+│   └── GuíaProyecto.md          # Guía principal con instrucciones y estructura
 ├── hooks/                        # Custom hooks reutilizables
 ├── pages/                        # Rutas y páginas de Next.js
 │   ├── _app.js                  # Componente principal de la aplicación
-│   └── index.js                 # Página de inicio
-├── pruebas/                      # Tests y archivos de prueba
-├── público/                      # Archivos estáticos accesibles públicamente
-│   ├── iconos/                  # Iconos de la aplicación
-│   └── imágenes/                # Imágenes y recursos gráficos
-├── scripts/                      # Scripts de utilidad y automatización
-├── services/                     # Servicios y llamadas a APIs
-├── src/                          # Código fuente adicional
-├── styles/                       # Estilos y configuración CSS
-│   └── globals.css              # Estilos globales de la aplicación
-└── utils/                        # Funciones y utilidades helpers
-
-Archivos de configuración:
-├── postcss.config.js            # Configuración de PostCSS para procesamiento CSS
-├── tailwind.config.js           # Configuración de Tailwind CSS
-├── next.config.js               # Configuración de Next.js
-├── package-lock.json            # Control de versiones exactas de dependencias
-├── package.json                 # Dependencias y scripts del proyecto
-└── README.md                    # Documentación general del proyecto
+│   ├── administradores.js       # Panel de administración
+│   ├── api/                     # API Routes de Next.js
+│   │   └── maestros/
+│   │       ├── index.js         # Endpoint principal de maestros
+│   │       └── register.js      # Registro de maestros
+│   ├── auth/
+│   │   └── login.js            # Página de autenticación
+│   ├── index.js                 # Página de inicio
+│   ├── login/
+│   │   └── [tipo].js           # Página dinámica de login por tipo
+│   ├── maestros/
+│   │   └── disponibilidad.js   # Gestión de disponibilidad
+│   └── registro/
+│       ├── cliente.js          # Registro de clientes
+│       └── maestro.js          # Registro de maestros
+├── prisma/                      # Configuración y modelos de Prisma
+│   ├── migrations/             # Migraciones de base de datos
+│   └── schema.prisma           # Schema de la base de datos
+├── styles/                      # Estilos y configuración CSS
+│   └── globals.css             # Estilos globales
+├── Dockerfile                   # Configuración de Docker
+├── LICENSE.md                   # Licencia del proyecto
+├── README.md                    # Documentación general
+├── next.config.js              # Configuración de Next.js
+├── package.json                # Dependencias y scripts
+├── postcss.config.js           # Configuración de PostCSS
+├── tailwind.config.js          # Configuración de Tailwind CSS
+└── vercel.json                 # Configuración de despliegue en Vercel
 ```
 
 ## 9. Funciones zshrc para el proyecto
