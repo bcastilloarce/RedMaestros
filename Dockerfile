@@ -13,13 +13,14 @@ RUN apt-get update && \
 # Copy package files
 COPY package*.json ./
 
-# Clean install dependencies
+# Install dependencies including Prisma Accelerate
 RUN npm install
+RUN npm install @prisma/extension-accelerate
 
 # Copy Prisma schema
 COPY prisma ./prisma/
 
-# Generate Prisma Client with edge support
+# Generate Prisma Client
 RUN npx prisma generate
 
 # Copy the rest of the application
