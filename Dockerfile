@@ -1,17 +1,21 @@
 # Use Node.js LTS version
-FROM node:18-alpine
+FROM node:18-slim
 
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies
-RUN apk add --no-cache libc6-compat
+# Install system dependencies and clean up
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    openssl \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci
+# Install dependencies with specific npm config
+RUN npm config set unsafe-perm true && \
+    npm ci --production
 
 # Generate Prisma Client
 COPY prisma ./prisma
