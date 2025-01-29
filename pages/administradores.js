@@ -7,15 +7,15 @@ export default function Administradores() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [teachersRes, clientsRes] = await Promise.all([
-          fetch('/api/teachers'),
+        const [maestrosRes, clientsRes] = await Promise.all([
+          fetch('/api/maestros'),
           fetch('/api/clients')
         ]);
 
-        const teachersData = await teachersRes.json();
+        const maestrosData = await maestrosRes.json();
         const clientsData = await clientsRes.json();
 
-        setMaestros(teachersData);
+        setMaestros(maestrosData);
         setClientes(clientsData);
       } catch (error) {
         console.error('Error fetching data:', error);

@@ -36,7 +36,7 @@ export default function RegistroMaestro() {
     setDisponibilidad(disponibilidadData);
 
     try {
-      const response = await fetch('/api/teachers/register', {
+      const response = await fetch('/api/maestros/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
