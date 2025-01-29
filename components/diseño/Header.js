@@ -11,13 +11,15 @@ export default function Header() {
           <Link href="/" className="text-2xl font-bold text-blue-600 hover:text-blue-700">
             RedMaestros
           </Link>
-          <div className="flex flex-col md:flex-row gap-4 items-center">
-            <Link href="/buscar" className="text-gray-600 hover:text-blue-600">
-              Buscar Servicios
-            </Link>
-            <Link href="/como-funciona" className="text-gray-600 hover:text-blue-600">
-              Cómo Funciona
-            </Link>
+          <div className="flex flex-col items-center space-y-4 md:space-y-0 md:flex-row md:gap-4">
+            <div className="flex gap-4">
+              <Link href="/buscar" className="text-gray-600 hover:text-blue-600">
+                Buscar Servicios
+              </Link>
+              <Link href="/como-funciona" className="text-gray-600 hover:text-blue-600">
+                Cómo Funciona
+              </Link>
+            </div>
             <div className="relative">
               <button
                 onClick={() => setShowLoginDropdown(!showLoginDropdown)}
