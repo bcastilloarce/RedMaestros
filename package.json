@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate"
@@ -30,13 +30,7 @@
     "prisma": "6.3.0",
     "tailwindcss": "3.4.1"
   },
-  "overrides": {
-    "@rollup/plugin-terser": "^0.4.4",
-    "workbox-cacheable-response": "^7.0.0",
-    "sourcemap-codec": "^1.4.8",
-    "@jridgewell/sourcemap-codec": "^1.4.15",
-    "glob": "^9.3.5",
-    "rimraf": "^5.0.0",
-    "inflight": "^2.0.0"
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
