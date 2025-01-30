@@ -4,6 +4,7 @@
   "env": {
     "DATABASE_URL": "@database_url",
     "KV_URL": "@kv_url",
-    "KV_REST_API_TOKEN": "@kv_rest_api_token"
+    "KV_REST_API_TOKEN": "@kv_rest_api_token",
+    "DIRECT_URL": "@database_url"
   }
 }
